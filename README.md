@@ -2,7 +2,7 @@
 Basic configuration to run Django on a Docker container.
 It has been made using [this]([https://github.com/CoreyMSchafer](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/django/)) guide and it is strongly recommended to follow it.
 
-Just a few changes:
+Just a few things:
 - The settings.py file of the core application of the Django project is meant to be modified:
 
 ```
@@ -13,7 +13,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
-
+```
+```
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -24,6 +25,6 @@ DATABASES = {
         'PORT': os.environ.get('POSTGRES_PORT'),
     }
 }
-
 ```
 
+- The .gitignore file can be updated with "Dockerfile" and "docker-compose.yml".
