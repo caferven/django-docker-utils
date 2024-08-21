@@ -28,3 +28,4 @@ DATABASES = {
 ```
 
 - The .gitignore file can be updated with "Dockerfile" and "docker-compose.yml".
+- Remember that in order to run any command that uses "migrate.py" you'll need to use "docker-compose run --rm web python manage.py".
