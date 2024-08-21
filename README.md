@@ -1,6 +1,6 @@
 # django-docker-basics
 Basic configuration to run Django on a Docker container.
-It has been made using [this]([https://github.com/CoreyMSchafer](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/django/)) guide and it is strongly recommended to follow it.
+It has been made using [this](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/django/) guide and it is strongly recommended to follow it.
 
 Just a few things:
 - The settings.py file of the core application of the Django project is meant to be modified:
