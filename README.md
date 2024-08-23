@@ -7,13 +7,14 @@ It has been made using [this](https://github.com/docker/awesome-compose/tree/mas
 - Create the Dockerfile:
 
 ```docker
-# syntax=docker/dockerfile:1
 FROM python:3
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install -r requirements.txt
+RUN apt update
+RUN apt install gettext -y
 COPY . /code/
 ```
 
@@ -51,11 +52,15 @@ volumes:
 
 </aside>
 
+
 - The requirements.txt file exists in every Django project:
 
 ```
 Django>=3.0,<4.0
 psycopg2>=2.8
+pillow>=10.0
+python-decouple>=3.8
+django-crispy-forms>=2.0
 ```
 
 - In the docker-compose.yml file we have already specified the env_file and it should look like this one:
