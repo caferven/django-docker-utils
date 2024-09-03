@@ -1,4 +1,4 @@
-# django-docker-basics
+# django-docker-utils
 Personal basic configuration to run Django on a Docker container.
 It is strongly recommended to follow the [awesome-compose](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/django/) guide previously.
 
