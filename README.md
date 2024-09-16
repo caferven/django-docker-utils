@@ -4,21 +4,25 @@ It is strongly recommended to follow the [awesome-compose](https://github.com/do
 
 **REQUIREMENTS:** docker and docker-compose should be installed in order to follow these steps.
 
-- Create the Dockerfile:
+- Create the Dockerfile (note that there are optional commands):
 
 ```docker
+# syntax=docker/dockerfile:1
 FROM python:3
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install -r requirements.txt
-RUN apt update
-RUN apt install gettext -y
+RUN apt-get update
+# optional: install pytailwindcss if you want the Tailwind CLI
+RUN pip install pytailwindcss
+# optional: intall gettext for translations
+RUN apt-get install gettext -y
 COPY . /code/
 ```
 
-- And the docker-compose.yml file:
+- And the docker-compose.yml file (note that there's a locale directory just in case there are translations within the project):
 
 ```yaml
 services:
@@ -37,6 +41,8 @@ services:
     volumes:
       - .:/code
       - ./media:/code/media
+      - ./locale:/code/locale
+      - ./static:/code/static
     ports:
       - "8000:8000"
     env_file:
@@ -45,6 +51,8 @@ services:
       - db
 volumes:
   media:
+  locale:
+  static:
 ```
 
 <aside>
@@ -56,11 +64,13 @@ volumes:
 - The requirements.txt file exists in every Django project:
 
 ```
-Django>=3.0,<4.0
-psycopg2>=2.8
-pillow>=10.0
-python-decouple>=3.8
-django-crispy-forms>=2.0
+django
+psycopg2
+pillow
+python-decouple
+django-crispy-forms
+
+# optional: add a specific version
 ```
 
 - In the docker-compose.yml file we have already specified the env_file and it should look like this one:
@@ -98,6 +108,40 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
 
 [...]
 
+# Internationalization (this is an example of a project that is translated to Spanish)
+# https://docs.djangoproject.com/en/5.1/topics/i18n/
+
+LANGUAGE_CODE = 'es'
+
+LANGUAGES = (
+    ('es', _('Spanish')),
+    ('en', _('English')),
+)
+
+LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
+
+TIME_ZONE = 'Europe/Madrid'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+[...]
+
 EMAIL_HOST_USER = config('EMAIL_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_PASS')
 ```
@@ -119,3 +163,5 @@ DATABASES = {
 - The .gitignore file can be updated with "Dockerfile" and "docker-compose.yml".
 - Remember that in order to run any command that uses "[migrate.py](http://migrate.py/)" you'll need to use "docker-compose run --rm web python [manage.py](http://manage.py/)".
 - Some parameters need to be processed through config() and not os.environ.get(). To be able to do this, it is necessary to import decouple.
+- To enter the docker terminal, run: docker-compose exec web bash
+- To update the Tailwind CSS output.css file, run: tailwindcss -i static/css/input.css -o static/css/output.css (if the config file is located at .)
