@@ -2,6 +2,10 @@ django
 psycopg2
 pillow
 python-decouple
+# optional: install django-crispy-forms
 django-crispy-forms
-
+# optional: install pytailwindcss if you want the Tailwind CLI
+pytailwindcss
+# optional: install django- if you want the Tailwind CLI
+pytailwindcss
 # optional: add a specific version

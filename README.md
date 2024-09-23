@@ -7,7 +7,6 @@ It is strongly recommended to follow the [awesome-compose](https://github.com/do
 - Create the Dockerfile (note that there are optional commands):
 
 ```docker
-# syntax=docker/dockerfile:1
 FROM python:3
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -15,8 +14,6 @@ WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install -r requirements.txt
 RUN apt-get update
-# optional: install pytailwindcss if you want the Tailwind CLI
-RUN pip install pytailwindcss
 # optional: intall gettext for translations
 RUN apt-get install gettext -y
 COPY . /code/
@@ -68,7 +65,12 @@ django
 psycopg2
 pillow
 python-decouple
+# optional: install django-crispy-forms
 django-crispy-forms
+# optional: install pytailwindcss if you want the Tailwind CLI
+pytailwindcss
+# optional: install django- if you want the Tailwind CLI
+pytailwindcss
 
 # optional: add a specific version
 ```
