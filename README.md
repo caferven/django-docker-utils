@@ -79,7 +79,7 @@ pytailwindcss
 
 ```
 POSTGRES_DB=postgres
-OSTGRES_NAME=postgres
+POSTGRES_NAME=postgres
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 POSTGRES_HOST=db
@@ -167,3 +167,4 @@ DATABASES = {
 - Some parameters need to be processed through config() and not os.environ.get(). To be able to do this, it is necessary to import decouple.
 - To enter the docker terminal, run: docker-compose exec web bash
 - To update the Tailwind CSS output.css file, run: tailwindcss -i static/css/input.css -o static/css/output.css (if the config file is located at .)
+- Note that this is in case you use a PostgreSQL database.
