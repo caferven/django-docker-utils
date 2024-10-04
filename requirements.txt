@@ -6,6 +6,6 @@ python-decouple
 django-crispy-forms
 # optional: install pytailwindcss if you want the Tailwind CLI
 pytailwindcss
-# optional: install django- if you want the Tailwind CLI
-pytailwindcss
+# optional: install django-modeltranslation if you want translations
+django-modeltranslation
 # optional: add a specific version
